@@ -42,9 +42,9 @@ class Airplane {
 
 class Person {
   constructor(name, age) {
-    this.name = name,
-    this.age = age,
-    this.stomach = []
+    this.name = name;
+    this.age = age;
+    this.stomach = [];
   }
   eat(someFood) {
     if (this.stomach.length >= 10) {
@@ -76,10 +76,10 @@ class Person {
 
 class Car {
   constructor(model, milesPerGallon) {
-    this.model = model,
-    this.milesPerGallon = milesPerGallon,
-    this.tank = 0,
-    this.odometer = 0
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
   }
   fill(gallons) {
     return (this.tank += gallons);
@@ -110,9 +110,9 @@ class Car {
 */
 class Lambdasian {
   constructor(attributes) {
-    this.name = attributes.name,
-    this.age = attributes.age,
-    this.location = attributes.location
+    this.name = attributes.name;
+    this.age = attributes.age;
+    this.location = attributes.location;
   }
   speak() {
     return `Hello my name is ${this.name}, I am from ${this.location}.`;
@@ -136,15 +136,19 @@ class Lambdasian {
 class Instructor extends Lambdasian {
   constructor(attributes) {
     super(attributes)
-    this.specialty = attributes.specialty,
-    this.favLanguage = attributes.favLanguage,
-    this.catchPhrase = attributes.catchPhrase
+    this.specialty = attributes.specialty;
+    this.favLanguage = attributes.favLanguage;
+    this.catchPhrase = attributes.catchPhrase;
   }
   demo(subject) {
     return `Today we are learning about ${subject}`;
   } 
   grade(student, subject) {
     return `${student.name} receives a perfect score on ${subject}`;
+  }
+  adjustGrade(student) {
+    
+    return student.grade += (Math.random() * 10);
   }
 }
 
@@ -166,18 +170,31 @@ class Instructor extends Lambdasian {
 class Student extends Lambdasian {
   constructor(attributes){
     super(attributes)
-    this.previousBackground = attributes.previousBackground,
-    this.className = attributes.className,
-    this.favSubjects = attributes.favSubjects
+    this.previousBackground = attributes.previousBackground;
+    this.className = attributes.className;
+    this.favSubjects = attributes.favSubjects;
+    this.grade = Math.random() * 100;
   }
   listSubjects() {
-    return `Loving ${this.favSubjects[0]}, ${this.favSubjects[1]}, and ${this.favSubjects[2]}!`;
+    let str = '';
+    this.favSubjects.forEach(element => str += element + ', ');
+    return `Loving ${str}!`;
   }
   PRAssignment(subject) {
     return `${this.name} has submitted a PR for ${subject}`;
   }
   sprintChallenge(subject) {
     return `${this.name} has begun sprint challenge on ${subject}`;
+  }
+  graduate(Instructor) {
+    if (this.grade >= 70) {
+      return `Congrats! You graduated with a ${this.grade}%.`;
+    } else {
+      do {  
+        Instructor.adjustGrade(this);
+      }
+      while (this.grade < 70);
+    }
   }
 }
 
